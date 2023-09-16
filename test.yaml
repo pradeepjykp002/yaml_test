@@ -1,0 +1,11 @@
+steps:
+- task: CmdLine@2
+  inputs:
+    script: |
+      $source = "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.20.1_1.msi"
+      $destination = "C:\Users\pmunusam\OpenJDK11U-jdk_x64_windows_hotspot_11.0.20.1_1.msi"
+      $client = new-object System.Net.WebClient 
+      $cookie = "oraclelicense=accept-securebackup-cookie"
+      $client.Headers.Add([System.Net.HttpRequestHeader]::Cookie, $cookie) 
+      $client.downloadFile($source, $destination)
+      msiexec.exe /i OpenJDK11U-jdk_x64_windows_hotspot_11.0.20.1_1.msi /quiet /qn
